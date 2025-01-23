@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: demo-app-container
-        image: sharmaguyz/demo-app:v1  # Replace this with your Docker image
+        image: sharmaguyz/demo-app-v2:v2   # Replace this with your Docker image
         ports:
         - containerPort: 3000  # Port that the app is listening on
         env:
