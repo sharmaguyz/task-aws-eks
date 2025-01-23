@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app-deployment
+  labels:
+    app: demo-app
+spec:
+  replicas: 1  # Number of pods to run
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+      - name: demo-app-container
+        image: sharmaguyz/demo-app:v1  # Replace this with your Docker image
+        ports:
+        - containerPort: 3000  # Port that the app is listening on
+        env:
+        - name: NODE_ENV
+          value: "demo"  # Example environment variable
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app-service
+spec:
+  selector:
+    app: demo-app
+  ports:
+  - protocol: TCP
+    port: 80  # Port exposed to the outside world
+    targetPort: 3000  # Port the app is running on inside the container
+  type: NodePort  # You can change this to ClusterIP, NodePort, etc.
+
